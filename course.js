@@ -4,8 +4,8 @@
 FR.course({
  site: "https://colin-walker.mykajabi.com/products/fleet-ready",
  webhook: "https://services.leadconnectorhq.com/hooks/I4agC2G5KURNKuZ9YZJ6/webhook-trigger/b3b6bb0c-0213-4655-8c4b-0f721eca8815",
- // Starter Pack: free pages at the start of the course.  starterWebhook is the GHL webhook for the fleet profile (blank = not sent).
- starter: {"category": "2161129430", "pages": [{"slug": "welcome", "title": "Welcome: The Helicopter View", "post": "2201993569"}, {"slug": "systems", "title": "Your Fleet Systems List", "post": "2201993570"}, {"slug": "numbers", "title": "Your Starting Numbers", "post": "2201993571"}, {"slug": "emails", "title": "Data Request Emails", "post": "2201993572"}]},
+ // Starter Pack: the free course everyone gets on registration.  starterWebhook is the GHL webhook for the fleet profile (blank = not sent).
+ starter: {"site": "https://colin-walker.mykajabi.com/products/fleet-ready-starter-pack", "category": "2161129464", "pages": [{"slug": "welcome", "title": "Welcome: The Helicopter View", "post": "2201993784"}, {"slug": "systems", "title": "Your Fleet Systems List", "post": "2201993785"}, {"slug": "numbers", "title": "Your Starting Numbers", "post": "2201993786"}, {"slug": "emails", "title": "Data Request Emails", "post": "2201993787"}]},
  starterWebhook: "",
  modules: [
   {"slug": "cost-per-mile", "title": "Know Your True Cost per Mile", "summary": "Put one honest number on what each mile really costs you.", "category": "2161016196", "lesson": "2201534878", "quiz": "2201508377"},

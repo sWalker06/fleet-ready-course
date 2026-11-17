@@ -30,7 +30,7 @@ function starter(el){
   if(i<0){el.textContent="Fleet Ready: starter page '"+slug+"' isn't in course.js yet.";return;}
   var nx=S.pages[i+1],m1=c.modules[0];
   var ctx={n:i+1,total:S.pages.length,mods:c.modules.length,webhook:c.starterWebhook||"",
-   nextUrl:nx?url(c,S.category,nx.post):url(c,m1.category,m1.lesson),
+   nextUrl:nx?(S.site||c.site)+"/categories/"+S.category+"/posts/"+nx.post:url(c,m1.category,m1.lesson),
    nextLabel:nx?"Next: "+nx.title:"Start Module 1: "+m1.title};
   withStarter(function(){if(FR.starterPages[slug])FR.starterPages[slug](el,ctx);});
  });
