@@ -20,7 +20,23 @@ function withCourse(f){if(FR.C)f(FR.C);else{courseCbs.push(f);if(courseCbs.lengt
 FR.add=function(slug,factory){FR.mods[slug]=factory;var w=waiting[slug]||[];waiting[slug]=[];w.forEach(function(f){f(factory);});};
 function withModule(slug,f){if(FR.mods[slug])return f(FR.mods[slug]);(waiting[slug]=waiting[slug]||[]).push(f);if(waiting[slug].length===1)load(BASE+"modules/"+slug+".js");}
 function url(c,cat,post){return c.site+"/categories/"+cat+"/posts/"+post;}
+FR.shell=function(el){fonts();css("frl-css",LCSS);el.outerHTML=LMARK;};
+var starterCbs=[];
+function withStarter(f){if(FR.starterPages)return f();starterCbs.push(f);if(starterCbs.length===1){FR.starterReady=function(){var cb=starterCbs;starterCbs=[];cb.forEach(function(g){g();});};load(BASE+"starter.js");}}
+function starter(el){
+ var slug=el.id.replace(/^fr-starter-/,"");
+ withCourse(function(c){
+  var S=c.starter||{pages:[]},i=-1;S.pages.forEach(function(p,k){if(p.slug===slug)i=k;});
+  if(i<0){el.textContent="Fleet Ready: starter page '"+slug+"' isn't in course.js yet.";return;}
+  var nx=S.pages[i+1],m1=c.modules[0];
+  var ctx={n:i+1,total:S.pages.length,mods:c.modules.length,webhook:c.starterWebhook||"",
+   nextUrl:nx?url(c,S.category,nx.post):url(c,m1.category,m1.lesson),
+   nextLabel:nx?"Next: "+nx.title:"Start Module 1: "+m1.title};
+  withStarter(function(){if(FR.starterPages[slug])FR.starterPages[slug](el,ctx);});
+ });
+}
 FR.scan=function(){
+ Array.prototype.forEach.call(document.querySelectorAll('[id^="fr-starter-"]'),function(el){if(el.getAttribute("data-fr-done"))return;el.setAttribute("data-fr-done","1");starter(el);});
  var els=document.querySelectorAll('[id^="fr-lesson-"],[id^="fr-quiz-"]');
  Array.prototype.forEach.call(els,function(el){
   if(el.getAttribute("data-fr-done"))return;el.setAttribute("data-fr-done","1");
