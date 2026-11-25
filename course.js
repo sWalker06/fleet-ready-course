@@ -8,7 +8,7 @@ FR.course({
  starter: {"site": "https://colin-walker.mykajabi.com/products/fleet-ready-starter-pack", "category": "2161129464", "pages": [{"slug": "welcome", "title": "Welcome: The Helicopter View", "post": "2201993784"}, {"slug": "systems", "title": "Your Fleet Systems List", "post": "2201993785"}, {"slug": "numbers", "title": "Your Starting Numbers", "post": "2201993786"}, {"slug": "emails", "title": "Data Request Emails", "post": "2201993787"}]},
  starterWebhook: "",
  // join: the checkout the last Starter Pack page sends people to.  Blank = straight to Module 1.
- join: "https://colin-walker.mykajabi.com/offers/ApLssA37/checkout",
+ join: "https://colin-walker.mykajabi.com/offers/ApLssA37/checkout?coupon_code=FOUNDER",
  modules: [
   {"slug": "cost-per-mile", "title": "Know Your True Cost per Mile", "summary": "Put one honest number on what each mile really costs you.", "category": "2161016196", "lesson": "2201534878", "quiz": "2201508377"},
   {"slug": "system-use", "title": "Get Full Value from Your System", "summary": "Find the features you already pay for and switch on the ones that save money.", "category": "2161016316", "lesson": "2201534786", "quiz": "2201508855"},
