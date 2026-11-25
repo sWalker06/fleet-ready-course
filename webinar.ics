@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Asset Data Solutions//Fleet Ready//EN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:fleet-ready-webinar-20261204@fleet-ready.com
+DTSTAMP:20261125T210000Z
+DTSTART:20261204T110000Z
+DTEND:20261204T114500Z
+SUMMARY:Fleet Ready webinar with Colin Walker
+DESCRIPTION:45 minutes\, live online.  Colin Walker on what Fleet Ready is\, where fleets lose money and what to fix first.  Your join link is in your confirmation email.  Register: https://fleet-ready.com/webinar
+LOCATION:Online
+URL:https://fleet-ready.com/webinar
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Fleet Ready webinar starts in 15 minutes
+END:VALARM
+END:VEVENT
+END:VCALENDAR
