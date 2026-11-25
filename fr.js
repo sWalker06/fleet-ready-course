@@ -35,7 +35,11 @@ function starter(el){
   withStarter(function(){if(FR.starterPages[slug])FR.starterPages[slug](el,ctx);});
  });
 }
+var planCbs=[];
+function withPlan(f){if(FR.planPage)return f();planCbs.push(f);if(planCbs.length===1){FR.planReady=function(){var cb=planCbs;planCbs=[];cb.forEach(function(g){g();});};load(BASE+"plan.js");}}
+FR._h={money:money,num:num,fonts:fonts,css:css,url:url,withModule:withModule,base:BASE};
 FR.scan=function(){
+ Array.prototype.forEach.call(document.querySelectorAll('[id^="fr-plan"]'),function(el){if(el.getAttribute("data-fr-done"))return;el.setAttribute("data-fr-done","1");withCourse(function(c){withPlan(function(){FR.planPage(el,c);});});});
  Array.prototype.forEach.call(document.querySelectorAll('[id^="fr-starter-"]'),function(el){if(el.getAttribute("data-fr-done"))return;el.setAttribute("data-fr-done","1");starter(el);});
  var els=document.querySelectorAll('[id^="fr-lesson-"],[id^="fr-quiz-"]');
  Array.prototype.forEach.call(els,function(el){
@@ -54,7 +58,7 @@ FR.scan=function(){
     }else{
      var M=data.quiz;M.num=n;M.title=m.title;M.id="fr-m"+("0"+n).slice(-2)+"-"+slug;
      css("fq-css",QCSS);el.outerHTML=QMARK;
-     quiz(M,c.webhook,nx?url(c,nx.category,nx.lesson):c.site,nx?"Go to Module "+(n+1):"Back to the course",TOTAL);
+     quiz(M,c.webhook,nx?url(c,nx.category,nx.lesson):(c.plan?url(c,c.plan.category,c.plan.post):c.site),nx?"Go to Module "+(n+1):(c.plan?"See your Fleet Ready plan":"Back to the course"),TOTAL);
     }
    });
   });
@@ -167,6 +171,7 @@ function showResults(){
  try{var L=JSON.parse(localStorage.getItem("fr_leaks")||"{}")||{};L[M.num]=Math.round(out.leak||0);localStorage.setItem("fr_leaks",JSON.stringify(L));if(out.cpm)localStorage.setItem("fr_cpm",String(out.cpm));}catch(e){}
  var s=ans.reduce(function(t,a){return t+a;},0), bi=band(s), B=BANDS[bi], weak=[];
  ans.forEach(function(a,i){if(a>=2)weak.push(i);});
+ try{var RS=JSON.parse(localStorage.getItem("fr_results")||"{}")||{};RS[M.id.replace(/^fr-m\d+-/,"")]=[bi,s,max,Math.round(out.leak||0),weak,ans];localStorage.setItem("fr_results",JSON.stringify(RS));}catch(e){}
  var h='<div class="fq-sec" style="text-align:center;padding:34px 24px">'+
   '<div style="width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(135deg,#FF7A2F,#FF9A4D);display:grid;place-items:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#141210" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5 11-11"/></svg></div>'+
   '<h3 class="fq-h">Your breakdown is on its way</h3>'+
